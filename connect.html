@@ -237,7 +237,7 @@ function handleSubscribe() {
   if (!name || !email) {
     alert("Please fill in your name and email.");
     return;
-  }
+  
 fetch("https://app.convertkit.com/forms/7b803039d6/subscriptions", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
