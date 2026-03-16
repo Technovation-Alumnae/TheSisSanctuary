@@ -238,14 +238,11 @@ function handleSubscribe() {
     alert("Please fill in your name and email.");
     return;
   }
-  fetch("https://api.convertkit.com/v3/forms/7b803039d6/subscribe", {
+fetch("https://app.convertkit.com/forms/7b803039d6/subscriptions", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      api_key: "1_gcgCHlQcwHEm4Jz3RtSg",
-      first_name: name,
-      email: email
-    })
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `api_key=1_gcgCHlQcwHEm4Jz3RtSg&first_name=${encodeURIComponent(name)}&email_address=${encodeURIComponent(email)}`
+  })
   })
   .then(res => res.json())
   .then(() => {
