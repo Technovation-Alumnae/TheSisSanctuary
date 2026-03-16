@@ -238,20 +238,27 @@ function handleSubscribe() {
     alert("Please fill in your name and email.");
     return;
   }
-  const data = new FormData();
-  data.append("fields[first_name]", name);
-  data.append("email_address", email);
-  fetch("https://app.kit.com/forms/7b803039d6/subscriptions", {
-    method: "POST",
-    mode: "no-cors",
-    body: data
-  })
-  .then(() => {
-    alert("You're on the list! Can't wait to show up in your inbox. 🌿");
-  })
-  .catch(() => {
-    alert("Something went wrong. Please try again.");
-  });
+  const form = document.createElement("form");
+  form.action = "https://app.convertkit.com/forms/7b803039d6/subscriptions";
+  form.method = "POST";
+  form.target = "_blank";
+
+  const nameInput = document.createElement("input");
+  nameInput.name = "fields[first_name]";
+  nameInput.value = name;
+
+  const emailInput = document.createElement("input");
+  emailInput.name = "email_address";
+  emailInput.value = email;
+
+  form.appendChild(nameInput);
+  form.appendChild(emailInput);
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
+
+  alert("You're on the list! Can't wait to show up in your inbox. 🌿");
+}
 }
 </script>
 </body></html>
