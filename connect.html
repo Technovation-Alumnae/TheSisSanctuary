@@ -231,6 +231,29 @@ hamburger.addEventListener("click",()=>{const o=mobileMenu.classList.toggle("ope
 document.querySelectorAll(".mobile-link").forEach(l=>l.addEventListener("click",()=>{mobileMenu.classList.remove("open");hamburger.classList.remove("open");document.body.style.overflow="";}));
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible");}),{threshold:.08,rootMargin:"0px 0px -40px 0px"});
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
-function handleSubscribe(){const name=document.getElementById("fname").value;const email=document.getElementById("email").value;if(!name||!email){alert("Please fill in your name and email.");return;}const btn=document.querySelector(".form-submit");btn.textContent="You're on the list! 🌿";btn.style.background="var(--sage-deep)";btn.disabled=true;}
+function handleSubscribe() {
+  const name = document.getElementById("fname").value;
+  const email = document.getElementById("email").value;
+  if (!name || !email) {
+    alert("Please fill in your name and email.");
+    return;
+  }
+  fetch("https://api.convertkit.com/v3/forms/7b803039d6/subscribe", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      api_key: "1_gcgCHlQcwHEm4Jz3RtSg",
+      first_name: name,
+      email: email
+    })
+  })
+  .then(res => res.json())
+  .then(() => {
+    alert("You're on the list! Can't wait to show up in your inbox. 🌿");
+  })
+  .catch(() => {
+    alert("Something went wrong. Please try again.");
+  });
+}
 </script>
 </body></html>
